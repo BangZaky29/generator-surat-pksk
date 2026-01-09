@@ -119,27 +119,63 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 min-h-[800px]">
-      <div className="max-w-4xl mx-auto">
+    <div className="
+        bg-white 
+        p-4 sm:p-6 lg:p-8
+        rounded-lg shadow-sm 
+        border border-gray-200 
+        print:border-0 print:shadow-none print:rounded-none
+        min-h-[800px]
+        overflow-x-auto
+      ">
+      <div className="
+          max-w-4xl mx-auto
+          origin-top
+          scale-[0.85]
+          sm:scale-100
+        ">
         {/* Header dengan Logo */}
-        <div className="mb-6 pb-4 border-b-2 border-gray-800">
-          {logoHeader ? (
-            <img src={logoHeader} alt="Logo Header" className="h-20 mx-auto mb-3" />
-          ) : (
-            <div className="text-center mb-3">
-              <div className="h-20 bg-gray-100 rounded flex items-center justify-center">
-                <span className="text-gray-400 text-sm">Logo Header</span>
+        {/* Header dengan Logo */}
+          <div className="mb-6 pb-4 border-b-2 border-gray-800">
+            <div className="flex items-start gap-4 sm:gap-6">
+              
+              {/* Logo - Kiri */}
+              <div className="w-16 sm:w-20 lg:w-24 flex-shrink-0">
+                {logoHeader ? (
+                  <img
+                    src={logoHeader}
+                    alt="Logo Header"
+                    className="h-20 w-full object-contain"
+                  />
+                ) : (
+                  <div className="h-20 bg-gray-100 rounded flex items-center justify-center">
+                    <span className="text-gray-400 text-xs">Logo</span>
+                  </div>
+                )}
               </div>
+
+              {/* Teks Header - Tengah */}
+              <div className="
+                flex-1 text-center
+                text-[11px] sm:text-sm
+                leading-tight
+                -ml-10 sm:-ml-16 lg:-ml-20
+              ">
+                <p className="font-semibold">
+                  {data.namaGedung || 'THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2'}
+                </p>
+                <p>{data.alamatGedung || 'Jl. Boulevard Raya No.1, RT.4/RW.17'}</p>
+                <p>{data.alamatGedung2 || 'Kel. Kelapa Gading Timur, Kec. Kelapa Gading'}</p>
+                <p>{data.alamatGedung3 || 'Jakarta Utara, DKI Jakarta, 14240'}</p>
+                <p>
+                  Telepon/Fax : {data.telpon || '(021) 45840071'}/
+                  {data.fax || '22450823'}
+                </p>
+              </div>
+
             </div>
-          )}
-          <div className="text-center text-sm leading-tight">
-            <p className="font-semibold">{data.namaGedung || 'THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2'}</p>
-            <p>{data.alamatGedung || 'Jl. Boulevard Raya No.1, RT.4/RW.17'}</p>
-            <p>{data.alamatGedung2 || 'Kel. Kelapa Gading Timur, Kec. Kelapa Gading'}</p>
-            <p>{data.alamatGedung3 || 'Jakarta Utara, DKI Jakarta, 14240'}</p>
-            <p>Telepon/Fax : {data.telpon || '(021) 45840071'}/{data.fax || '22450823'}</p>
           </div>
-        </div>
+
 
         {/* Judul Surat */}
         <div className="text-center mb-6">
@@ -148,11 +184,16 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
         </div>
 
         {/* Isi Surat */}
-        <div className="text-justify leading-relaxed text-sm space-y-4">
+        <div className="
+          text-justify
+          leading-relaxed
+          text-[12px] sm:text-sm
+          space-y-3 sm:space-y-4
+        ">
           <p>Yang bertanda tangan di bawah ini :</p>
 
           {/* Pihak Pertama */}
-          <div className="ml-4">
+          <div className="ml-4 overflow-x-auto">
             <table className="w-full">
               <tbody>
                 <tr>
@@ -185,14 +226,14 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
           </div>
 
           {/* Pihak Kedua */}
-          <div className="ml-4">
+          <div className="ml-4 overflow-x-auto">
             <table className="w-full">
               <tbody>
                 <tr>
                   <td className="py-1 w-4">2.</td>
                   <td className="py-1 w-32">Nama</td>
                   <td className="py-1 w-4">:</td>
-                  <td className="py-1 font-semibold uppercase">{data.namaPihak2 || 'IWAN MALIK AL RASYID SIREGAR'}</td>
+                  <td className="py-1 font-semibold uppercase break-words">{data.namaPihak2 || 'IWAN MALIK AL RASYID SIREGAR'}</td>
                 </tr>
                 <tr>
                   <td></td>
@@ -204,13 +245,13 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
                   <td></td>
                   <td className="py-1 align-top">Alamat</td>
                   <td className="py-1 align-top">:</td>
-                  <td className="py-1 uppercase">{data.alamatPihak2 || 'JL. SAMUDRA OXFORD II NO. 24, RT/RW 004/006, RAWA BADAK SELATAN, KOJA, JAKARTA UTARA, DKI JAKARTA'}</td>
+                  <td className="py-1 uppercase break-words">{data.alamatPihak2 || 'JL. SAMUDRA OXFORD II NO. 24, RT/RW 004/006, RAWA BADAK SELATAN, KOJA, JAKARTA UTARA, DKI JAKARTA'}</td>
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1 align-top">Penanggung Jawab</td>
                   <td className="py-1 align-top">:</td>
-                  <td className="py-1 font-semibold uppercase">{data.perusahaanPihak2 || 'PT. GALANGGANG SAMUDERA MANDIRI'}</td>
+                  <td className="py-1 font-semibold uppercase break-words">{data.perusahaanPihak2 || 'PT. GALANGGANG SAMUDERA MANDIRI'}</td>
                 </tr>
               </tbody>
             </table>
@@ -317,28 +358,40 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
         <div className="mt-12">
           <p className="text-sm mb-8">{data.tempatTandaTangan || 'Jakarta'}, {data.tanggalSurat ? formatDate(data.tanggalSurat) : '15 Juli 2025'}</p>
           
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Pihak Pertama */}
             <div className="text-center">
               <p className="font-semibold mb-2">Pihak Pertama</p>
-              {stempelPihak1 && (
-                <div className="my-4 flex justify-center">
-                  <img src={stempelPihak1} alt="Stempel Pihak 1" className="h-24 opacity-80" />
-                </div>
-              )}
-              <div className="h-16 mb-2"></div>
+              
+              {/* Area TTD dengan Stempel Absolute */}
+              <div className="relative h-32 mb-2 flex items-center justify-center">
+                {stempelPihak1 && (
+                  <img 
+                    src={stempelPihak1} 
+                    alt="Stempel Pihak 1" 
+                    className="absolute inset-0 h-24 w-24 mx-auto my-auto opacity-70 object-contain" 
+                  />
+                )}
+              </div>
+              
               <p className="font-bold uppercase">({data.namaPihak1 || 'IDRUS HADDAD'})</p>
             </div>
 
             {/* Pihak Kedua */}
             <div className="text-center">
               <p className="font-semibold mb-2">Pihak Kedua</p>
-              {stempelPihak2 && (
-                <div className="my-4 flex justify-center">
-                  <img src={stempelPihak2} alt="Stempel Pihak 2" className="h-24 opacity-80" />
-                </div>
-              )}
-              <div className="h-16 mb-2"></div>
+              
+              {/* Area TTD dengan Stempel Absolute */}
+              <div className="relative h-32 mb-2 flex items-center justify-center">
+                {stempelPihak2 && (
+                  <img 
+                    src={stempelPihak2} 
+                    alt="Stempel Pihak 2" 
+                    className="absolute inset-0 h-24 w-24 mx-auto my-auto opacity-70 object-contain" 
+                  />
+                )}
+              </div>
+              
               <p className="font-bold uppercase">({data.namaPihak2 || 'IWAN MALIK AL RASYID SIREGAR'})</p>
             </div>
           </div>
@@ -350,6 +403,7 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
 
 // Main App Component
 export default function App() {
+  const [viewMode, setViewMode] = useState('form'); 
   const [openSections, setOpenSections] = useState({
     header: true,
     pihak1: false,
@@ -467,7 +521,13 @@ export default function App() {
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Left Panel - Form */}
-          <div className="lg:col-span-2 print:hidden">
+          <div
+              className={`
+                lg:col-span-2 print:hidden
+                ${viewMode === 'preview' ? 'hidden' : 'block'}
+                lg:block
+              `}
+            >
             <div className="bg-blue-50 rounded-lg p-4 mb-6 border border-blue-200">
               <div className="flex items-start gap-2">
                 <span className="text-2xl">💡</span>
@@ -763,7 +823,13 @@ export default function App() {
           </div>
 
           {/* Right Panel - Preview */}
-          <div className="lg:col-span-3">
+          <div
+              className={`
+                lg:col-span-3
+                ${viewMode === 'form' ? 'hidden' : 'block'}
+                lg:block
+              `}
+            >
             <div className="print:hidden mb-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold text-gray-800">
@@ -804,10 +870,60 @@ export default function App() {
           
           @page {
             size: A4;
-            margin: 1.5cm;
+            margin: 2cm 2cm 2cm 2cm;
+          }
+          
+          /* Page break untuk pasal-pasal */
+          .space-y-4 > div {
+            page-break-inside: avoid;
+            margin-bottom: 1rem;
+          }
+          
+          /* Margin tambahan untuk awal halaman baru */
+          .page-break-before {
+            page-break-before: always;
+            margin-top: 2cm;
+          }
+          
+          /* Hindari page break di tengah tanda tangan */
+          .mt-12 {
+            page-break-inside: avoid;
           }
         }
       `}</style>
+      {/* Floating Toggle Button (Mobile Only) */}
+        <div className="fixed bottom-4 right-4 z-50 lg:hidden">
+          <button
+            onClick={() =>
+              setViewMode(viewMode === 'form' ? 'preview' : 'form')
+            }
+            className="
+              w-14 h-14
+              rounded-full
+              bg-blue-600 hover:bg-blue-700
+              text-white
+              flex items-center justify-center
+              shadow-lg
+              transition-all
+              active:scale-95
+            "
+            aria-label="Toggle View"
+          >
+            {/* Icon */}
+            {viewMode === 'form' ? (
+              <FileText className="w-6 h-6" />
+            ) : (
+              <FileEdit className="w-6 h-6" />
+            )}
+
+            {/* Aksesibilitas label */}
+            <span className="sr-only">
+              {viewMode === 'form' ? 'Lihat Preview' : 'Edit Form'}
+            </span>
+          </button>
+
+        </div>
+
     </div>
   );
 }
