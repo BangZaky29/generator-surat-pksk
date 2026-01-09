@@ -118,6 +118,23 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
     const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
+  const renderText = (value, example, maxLength = 40) => {
+    if (!value || value === example) {
+      const shortExample =
+        example.length > maxLength
+          ? example.slice(0, maxLength) + '...'
+          : example;
+
+      return (
+        <span className="italic text-gray-400">
+          {shortExample}
+        </span>
+      );
+    }
+
+    return <span className="text-gray-900">{value}</span>;
+  };
+
 
   return (
     <div className="
@@ -163,14 +180,38 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
                 -ml-10 sm:-ml-16 lg:-ml-20
               ">
                 <p className="font-semibold">
-                  {data.namaGedung || 'THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2'}
+                  {renderText(
+                    data.namaGedung,
+                    'Alamat Gedung',
+                    30
+                  )}
                 </p>
-                <p>{data.alamatGedung || 'Jl. Boulevard Raya No.1, RT.4/RW.17'}</p>
-                <p>{data.alamatGedung2 || 'Kel. Kelapa Gading Timur, Kec. Kelapa Gading'}</p>
-                <p>{data.alamatGedung3 || 'Jakarta Utara, DKI Jakarta, 14240'}</p>
+                <p>{renderText(
+                  data.alamatGedung,
+                  'Alamat Gedung',
+                  30
+                )}</p>
+                <p>{renderText(
+                  data.alamatGedung2,
+                  'Alamat Gedung',  
+                  30
+                )}</p>
+                <p>{renderText(
+                  data.alamatGedung3,
+                  'Alamat Gedung',
+                  30
+                )}</p>
                 <p>
-                  Telepon/Fax : {data.telpon || '(021) 45840071'}/
-                  {data.fax || '22450823'}
+                  Telepon/Fax : {renderText(
+                    data.telpon,
+                    '(021) 45840071',
+                    15
+                  )}/
+                  {renderText(
+                    data.fax,
+                    '22450823',
+                    10
+                  )}
                 </p>
               </div>
 
@@ -201,25 +242,45 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
                   <td className="py-1 w-4">1.</td>
                   <td className="py-1 w-32">Nama</td>
                   <td className="py-1 w-4">:</td>
-                  <td className="py-1 font-semibold uppercase">{data.namaPihak1 || 'IDRUS HADDAD'}</td>
+                  <td className="py-1 font-semibold uppercase break-words">{renderText(
+                    data.namaPihak1,
+                    'Nama Lengkap',
+                    40
+                  )}</td>
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1">No. KTP</td>
                   <td className="py-1">:</td>
-                  <td className="py-1">{data.ktpPihak1 || '3175.1029.0398.0002'}</td>
+                  <td className="py-1 break-words">{renderText(
+                    data.ktpPihak1,
+                    '0000.0000.0000.0000',
+                    20
+                  )}</td> 
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1">Jabatan</td>
                   <td className="py-1">:</td>
-                  <td className="py-1 uppercase">{data.jabatanPihak1 || 'KEPALA CABANG'}</td>
+                  <td className="py-1 uppercase break-words">
+                    {renderText(
+                      data.jabatanPihak1,
+                      'KEPALA CABANG',
+                      30
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1 align-top">Alamat</td>
                   <td className="py-1 align-top">:</td>
-                  <td className="py-1 uppercase">{data.alamatPihak1 || 'JL. PIJAR NO.57 RT.005 RW.004, DUKUH, KRAMAT JATI, JAKARTA TIMUR, DKI JAKARTA'}</td>
+                  <td className="py-1 uppercase break-words">
+                    {renderText(
+                      data.alamatPihak1,
+                      'Alamat Lengkap',
+                      45
+                    )}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -234,25 +295,49 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
                   <td className="py-1 w-4">2.</td>
                   <td className="py-1 w-32">Nama</td>
                   <td className="py-1 w-4">:</td>
-                  <td className="py-1 font-semibold uppercase break-words">{data.namaPihak2 || 'IWAN MALIK AL RASYID SIREGAR'}</td>
+                  <td className="py-1 font-semibold uppercase break-words">
+                    {renderText(
+                      data.namaPihak2,
+                      'Nama Lengkap',
+                      40
+                    )}
+                  </td> 
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1">No. KTP</td>
                   <td className="py-1">:</td>
-                  <td className="py-1">{data.ktpPihak2 || '3172.0228.0197.0008'}</td>
+                  <td className="py-1 break-words">
+                    {renderText(
+                      data.ktpPihak2,
+                      '0000.0000.0000.0000',
+                      20
+                    )}
+                  </td> 
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1 align-top">Alamat</td>
                   <td className="py-1 align-top">:</td>
-                  <td className="py-1 uppercase break-words">{data.alamatPihak2 || 'JL. SAMUDRA OXFORD II NO. 24, RT/RW 004/006, RAWA BADAK SELATAN, KOJA, JAKARTA UTARA, DKI JAKARTA'}</td>
+                  <td className="py-1 uppercase break-words">
+                    {renderText(
+                      data.alamatPihak2,
+                      'Alamat Lengkap...',
+                      45
+                    )}
+                  </td>
                 </tr>
                 <tr>
                   <td></td>
                   <td className="py-1 align-top">Penanggung Jawab</td>
                   <td className="py-1 align-top">:</td>
-                  <td className="py-1 font-semibold uppercase break-words">{data.perusahaanPihak2 || 'PT. GALANGGANG SAMUDERA MANDIRI'}</td>
+                  <td className="py-1 font-semibold uppercase break-words">
+                    {renderText(
+                      data.perusahaanPihak2,
+                      'Nama PT',
+                      40
+                    )}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -269,7 +354,11 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
             <p className="font-bold">Pasal 1</p>
             <p>
               Pihak Pertama (Pemilik) bersedia Menyewakan Kantor Virtual Office Kepada Pihak Kedua yang beralamat 
-              di {data.alamatObjekSewa || 'THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2, Jl. Boulevard Raya No.1, RT.4/RW.17, Kel.Kelapa Gading Timur, Kec.Kelapa Gading, Kota Jakarta Utara, Daerah Khusus Ibukota Jakarta 14240'}
+              di {renderText(
+                data.alamatObjekSewa,
+                'Alamat Objek Sewa',
+                45
+              )}
             </p>
           </div>
 
@@ -286,8 +375,15 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
           <div>
             <p className="font-bold">Pasal 3</p>
             <p>
-              Masa sewa ini berlaku selama {data.masaSewa || '1 (Satu) Tahun'} terhitung mulai tanggal {data.tanggalMulai ? formatDate(data.tanggalMulai) : '15-07-2025'} sampai dengan {data.tanggalSelesai ? formatDate(data.tanggalSelesai) : '14-07-2026'} dan apabila Pihak Kedua akan memperpanjang masa sewa, maka Pihak Kedua wajib lapor 
-              kepada Pihak Pertama minimal 1 bulan sebelum masa sewa ini habis. Dan jika tenggat waktu berakhir, 
+              Masa sewa ini berlaku selama {renderText(
+                data.masaSewa,
+                '1 (Satu) Tahun',
+                10
+              )} terhitung mulai tanggal {data.tanggalMulai ? formatDate(data.tanggalMulai) : '15-07-2025'} sampai dengan {data.tanggalSelesai ? formatDate(data.tanggalSelesai) : '14-07-2026'} dan apabila Pihak Kedua akan memperpanjang masa sewa, maka Pihak Kedua wajib lapor kepada Pihak Pertama minimal 1 bulan sebelum masa sewa ini habis. Dan jika tenggat waktu berakhir, {renderText(
+                data.tenggatWaktu,
+                '15 (Lima) Hari',
+                10
+              )},   
               secara otomatis Kontrak Terputus serta tidak lagi berlaku dan mengikat kedua belah Pihak.
             </p>
           </div>
@@ -296,7 +392,11 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
           <div>
             <p className="font-bold">Pasal 4</p>
             <p>
-              Fasilitas yang di dapat adalah: {data.fasilitas || 'Alamat kantor berikut nomor telepon, fax, staf resepsionis bersama, Free ruang meeting 10 jam/bulan (konfirmasi terlebih dahulu sehari sebelum meeting). Selebihnya dari 10 jam dikenakan biaya tambahan 100 ribu/jam dengan minimal pemakaian 2 (Dua) jam dalam satu kali pertemuan.'}
+              Fasilitas yang di dapat adalah: {renderText(
+                data.fasilitas,
+                'Alamat kantor berikut nomor telepon, fax, staf resepsionis bersama, Free ruang meeting 10 jam/bulan (konfirmasi terlebih dahulu sehari sebelum meeting). Selebihnya dari 10 jam dikenakan biaya tambahan 100 ribu/jam dengan minimal pemakaian 2 (Dua) jam dalam satu kali pertemuan.',
+                45
+              )}
             </p>
           </div>
 
@@ -304,9 +404,33 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
           <div>
             <p className="font-bold">Pasal 5</p>
             <p>
-              Biaya sewa sebesar Rp {data.biayaSewa || '3.000.000'},-  ({data.biayaSewaTerbilang || 'Tiga Juta Rupiah'}) untuk masa sewa {data.masaSewa || '1 (Satu) Tahun'} dan biaya tersebut 
-              bisa dibayarkan tunai atau melalui transfer ke no. rek {data.bank || 'BCA'} {data.noRekening || '539.0561.565'} an. {data.atasNama || 'PT. SENTRAL BISNIS BERSAMA'} Pihak Kedua kepada Pihak Pertama pada saat Surat Perjanjian Kontrak Sewa Kantor bersama 
-              ini ditandatangani
+              Biaya sewa sebesar Rp {renderText(
+                data.biayaSewa,
+                '3.000.000',
+                10
+              )},-  ({renderText(
+                data.biayaSewaTerbilang,
+                'Tiga Juta Rupiah',
+                20
+              )}) untuk masa sewa {renderText(
+                data.masaSewa,
+                '1 (Satu) Tahun',
+                10
+              )} dan biaya tersebut 
+              bisa dibayarkan tunai atau melalui transfer ke no. rek {renderText(
+                data.bank,
+                'BCA',
+                10
+              )} {renderText(
+                data.noRekening,
+                '000.000.000',
+                10
+              )} an. {renderText(
+                data.atasNama,
+                'Atas Nama',
+                20
+              )} Pihak Kedua kepada Pihak Pertama pada saat Surat Perjanjian Kontrak
+              ini ditandatangani  
             </p>
           </div>
 
@@ -346,7 +470,11 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
             <p>
               Apabila terjadi penyimpangan dari ketentuan tersebut diatas, maka kedua belah pihak sepakat untuk 
               menyelesaikan secara musyawarah. Apabila tidak dapat diselesaikan secara musyawarah, maka kedua belah 
-              pihak sepakat menyelesaikan secara hukum yang berlaku dengan memilih Pengadilan Negeri {data.pengadilan || 'Jakarta Utara'}.
+              pihak sepakat menyelesaikan secara hukum yang berlaku dengan memilih Pengadilan Negeri {renderText(
+                data.pengadilan,
+                'Jakarta Utara',
+                20
+              )}.
             </p>
           </div>
 
@@ -375,7 +503,11 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
                 )}
               </div>
               
-              <p className="font-bold uppercase">({data.namaPihak1 || 'IDRUS HADDAD'})</p>
+              <p className="font-bold uppercase break-words">({renderText(
+                data.namaPihak1,
+                'Nama Lengkap',
+                40
+              )})</p>
             </div>
 
             {/* Pihak Kedua */}
@@ -393,7 +525,11 @@ const PreviewSurat = ({ data, logoHeader, stempelPihak1, stempelPihak2 }) => {
                 )}
               </div>
               
-              <p className="font-bold uppercase">({data.namaPihak2 || 'IWAN MALIK AL RASYID SIREGAR'})</p>
+              <p className="font-bold uppercase break-words">({renderText(
+                data.namaPihak2,
+                'Nama Lengkap',
+                40
+              )})</p> 
             </div>
           </div>
         </div>
@@ -415,40 +551,38 @@ export default function App() {
 
   const [formData, setFormData] = useState({
     // Header
-    namaGedung: 'THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2',
-    alamatGedung: 'Jl. Boulevard Raya No.1, RT.4/RW.17',
-    alamatGedung2: 'Kel. Kelapa Gading Timur, Kec. Kelapa Gading',
-    alamatGedung3: 'Jakarta Utara, DKI Jakarta, 14240',
-    telpon: '(021) 45840071',
-    fax: '22450823',
-    nomorSurat: '0224/LT.02/R.B2/PT.SBB/2025',
-    
-    // Pihak Pertama
-    namaPihak1: 'IDRUS HADDAD',
-    ktpPihak1: '3175.1029.0398.0002',
-    jabatanPihak1: 'KEPALA CABANG',
-    alamatPihak1: 'JL. PIJAR NO.57 RT.005 RW.004, DUKUH, KRAMAT JATI, JAKARTA TIMUR, DKI JAKARTA',
-    
-    // Pihak Kedua
-    namaPihak2: 'IWAN MALIK AL RASYID SIREGAR',
-    ktpPihak2: '3172.0228.0197.0008',
-    alamatPihak2: 'JL. SAMUDRA OXFORD II NO. 24, RT/RW 004/006, RAWA BADAK SELATAN, KOJA, JAKARTA UTARA, DKI JAKARTA',
-    perusahaanPihak2: 'PT. GALANGGANG SAMUDERA MANDIRI',
-    
-    // Isi Surat
-    alamatObjekSewa: 'THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2, Jl. Boulevard Raya No.1, RT.4/RW.17, Kel.Kelapa Gading Timur, Kec.Kelapa Gading, Kota Jakarta Utara, Daerah Khusus Ibukota Jakarta 14240',
-    masaSewa: '1 (Satu) Tahun',
-    tanggalMulai: '2025-07-15',
-    tanggalSelesai: '2026-07-14',
-    fasilitas: 'Alamat kantor berikut nomor telepon, fax, staf resepsionis bersama, Free ruang meeting 10 jam/bulan (konfirmasi terlebih dahulu sehari sebelum meeting). Selebihnya dari 10 jam dikenakan biaya tambahan 100 ribu/jam dengan minimal pemakaian 2 (Dua) jam dalam satu kali pertemuan.',
-    biayaSewa: '3.000.000',
-    biayaSewaTerbilang: 'Tiga Juta Rupiah',
-    bank: 'BCA',
-    noRekening: '539.0561.565',
-    atasNama: 'PT. SENTRAL BISNIS BERSAMA',
-    pengadilan: 'Jakarta Utara',
-    tempatTandaTangan: 'Jakarta',
-    tanggalSurat: '2025-07-15'
+    namaGedung: '',
+    alamatGedung: '',
+    alamatGedung2: '',
+    alamatGedung3: '',
+    telpon: '',
+    fax: '',
+    nomorSurat: '',
+
+    namaPihak1: '',
+    ktpPihak1: '',
+    jabatanPihak1: '',
+    alamatPihak1: '',
+
+    namaPihak2: '',
+    ktpPihak2: '',
+    alamatPihak2: '',
+    perusahaanPihak2: '',
+
+    alamatObjekSewa: '',
+    masaSewa: '',
+    tanggalMulai: '',
+    tanggalSelesai: '',
+    fasilitas: '',
+    biayaSewa: '',
+    biayaSewaTerbilang: '',
+    bank: '',
+    noRekening: '',
+    atasNama: '',
+    pengadilan: '',
+    tempatTandaTangan: '',
+    tanggalSurat: ''
+
   });
 
   const [logoHeader, setLogoHeader] = useState(null);
@@ -560,28 +694,28 @@ export default function App() {
                   name="namaGedung"
                   value={formData.namaGedung}
                   onChange={handleInputChange}
-                  placeholder="THE KENSINGTON OFFICE TOWER Lt.2 Ruang B2"
+                  placeholder="Nama Gedung"
                 />
                 <InputField
                   label="Alamat Baris 1"
                   name="alamatGedung"
                   value={formData.alamatGedung}
                   onChange={handleInputChange}
-                  placeholder="Jl. Boulevard Raya No.1, RT.4/RW.17"
+                  placeholder="Alamat Gedung"
                 />
                 <InputField
                   label="Alamat Baris 2"
                   name="alamatGedung2"
                   value={formData.alamatGedung2}
                   onChange={handleInputChange}
-                  placeholder="Kel. Kelapa Gading Timur, Kec. Kelapa Gading"
+                  placeholder="Alamat Gedung"
                 />
                 <InputField
                   label="Alamat Baris 3"
                   name="alamatGedung3"
                   value={formData.alamatGedung3}
                   onChange={handleInputChange}
-                  placeholder="Jakarta Utara, DKI Jakarta, 14240"
+                  placeholder="Alamat Gedung"
                 />
                 <div className="grid grid-cols-2 gap-4">
                   <InputField
@@ -620,28 +754,28 @@ export default function App() {
                   name="namaPihak1"
                   value={formData.namaPihak1}
                   onChange={handleInputChange}
-                  placeholder="IDRUS HADDAD"
+                  placeholder="Nama Lengkap"
                 />
                 <InputField
                   label="No. KTP"
                   name="ktpPihak1"
                   value={formData.ktpPihak1}
                   onChange={handleInputChange}
-                  placeholder="3175.1029.0398.0002"
+                  placeholder="0000.0000.0000.0000"
                 />
                 <InputField
                   label="Jabatan"
                   name="jabatanPihak1"
                   value={formData.jabatanPihak1}
                   onChange={handleInputChange}
-                  placeholder="KEPALA CABANG"
+                  placeholder="Jabatan"
                 />
                 <TextareaField
                   label="Alamat Lengkap"
                   name="alamatPihak1"
                   value={formData.alamatPihak1}
                   onChange={handleInputChange}
-                  placeholder="JL. PIJAR NO.57 RT.005 RW.004, DUKUH..."
+                  placeholder="Alamat Lengkap"
                   rows={3}
                 />
               </Accordion>
@@ -658,21 +792,21 @@ export default function App() {
                   name="namaPihak2"
                   value={formData.namaPihak2}
                   onChange={handleInputChange}
-                  placeholder="IWAN MALIK AL RASYID SIREGAR"
+                  placeholder="Nama Lengkap"
                 />
                 <InputField
                   label="No. KTP"
                   name="ktpPihak2"
                   value={formData.ktpPihak2}
                   onChange={handleInputChange}
-                  placeholder="3172.0228.0197.0008"
+                  placeholder="0000.0000.0000.0000"
                 />
                 <TextareaField
                   label="Alamat Lengkap"
                   name="alamatPihak2"
                   value={formData.alamatPihak2}
                   onChange={handleInputChange}
-                  placeholder="JL. SAMUDRA OXFORD II NO. 24..."
+                  placeholder="Alamat Lengkap"
                   rows={3}
                 />
                 <InputField
@@ -680,7 +814,7 @@ export default function App() {
                   name="perusahaanPihak2"
                   value={formData.perusahaanPihak2}
                   onChange={handleInputChange}
-                  placeholder="PT. GALANGGANG SAMUDERA MANDIRI"
+                  placeholder="Nama Perusahaan/Penanggung Jawab"
                 />
               </Accordion>
 
@@ -696,7 +830,7 @@ export default function App() {
                   name="alamatObjekSewa"
                   value={formData.alamatObjekSewa}
                   onChange={handleInputChange}
-                  placeholder="THE KENSINGTON OFFICE TOWER..."
+                  placeholder="Alamat Objek Sewa"
                   rows={3}
                 />
                 <InputField
@@ -727,7 +861,7 @@ export default function App() {
                   name="fasilitas"
                   value={formData.fasilitas}
                   onChange={handleInputChange}
-                  placeholder="Alamat kantor berikut nomor telepon, fax..."
+                  placeholder="Fasilitas yang didapatkan oleh pihak ini..."
                   rows={4}
                 />
                 <div className="grid grid-cols-2 gap-4">
@@ -736,14 +870,14 @@ export default function App() {
                     name="biayaSewa"
                     value={formData.biayaSewa}
                     onChange={handleInputChange}
-                    placeholder="3.000.000"
+                    placeholder="Biaya Sewa (Angka)"
                   />
                   <InputField
                     label="Biaya Sewa (Terbilang)"
                     name="biayaSewaTerbilang"
                     value={formData.biayaSewaTerbilang}
                     onChange={handleInputChange}
-                    placeholder="Tiga Juta Rupiah"
+                    placeholder="Biaya Sewa (Terbilang)"
                   />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
@@ -752,21 +886,21 @@ export default function App() {
                     name="bank"
                     value={formData.bank}
                     onChange={handleInputChange}
-                    placeholder="BCA"
+                    placeholder="Bank"
                   />
                   <InputField
                     label="No. Rekening"
                     name="noRekening"
                     value={formData.noRekening}
                     onChange={handleInputChange}
-                    placeholder="539.0561.565"
+                    placeholder="000.000.000"
                   />
                   <InputField
                     label="Atas Nama"
                     name="atasNama"
                     value={formData.atasNama}
                     onChange={handleInputChange}
-                    placeholder="PT. SENTRAL..."
+                    placeholder="Atas Nama"
                   />
                 </div>
                 <InputField
@@ -774,7 +908,7 @@ export default function App() {
                   name="pengadilan"
                   value={formData.pengadilan}
                   onChange={handleInputChange}
-                  placeholder="Jakarta Utara"
+                  placeholder="Pengadilan"
                 />
                 <div className="grid grid-cols-2 gap-4">
                   <InputField
@@ -782,7 +916,7 @@ export default function App() {
                     name="tempatTandaTangan"
                     value={formData.tempatTandaTangan}
                     onChange={handleInputChange}
-                    placeholder="Jakarta"
+                    placeholder="Tempat Tanda Tangan"
                   />
                   <InputField
                     label="Tanggal Surat"
